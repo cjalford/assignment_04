@@ -37,12 +37,12 @@ def calc_gross_pay(hours: float, rate: float) -> float:
     if pd.isna(rate):
         return 0.0
     if hours <= OVERTIME_THRESHOLD:
-        return hours * rate
+        return round(hours * rate, 2)
     else:
         regular_pay = OVERTIME_THRESHOLD * rate
         overtime_hours = hours - OVERTIME_THRESHOLD
         overtime_pay = overtime_hours * rate * OVERTIME_MULTIPLIER
-        return regular_pay + overtime_pay
+        return round(regular_pay + overtime_pay, 2)
 
 
 def classify_pay(hours: float, rate: float) -> str:

@@ -92,11 +92,11 @@ def clean_currency(value) -> float:
     - You wrote this function in Assignment 02. It is the same function. That
       is not an accident — cleaning currency is something every pipeline does.
     """
-    if isinstance(value, (int, float)):
+    if not isinstance(value, str):
+        if pd.isna(value):
+            return 0.0
         return float(value)
-    if pd.isna(value):
-        return 0.0
-    text = str(value).replace("$", "").replace(",", "").strip()
+    text = value.replace("$", "").replace(",", "").strip()
     try:
         return float(text)
     except ValueError:
